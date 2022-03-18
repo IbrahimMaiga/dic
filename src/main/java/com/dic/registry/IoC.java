@@ -6,7 +6,7 @@ import java.lang.reflect.InvocationTargetException;
  * @author Ibrahim Maiga <maiga.ibrm@gmail.com>
  */
 public interface IoC {
-    <T> void configure(Class<T> clazz) throws IoCRegistryException, InvocationTargetException, IllegalAccessException, InstantiationException;
+    <T> void configure(Class<T> clazz) throws IoCRegistryException, InvocationTargetException, IllegalAccessException, InstantiationException, NoSuchMethodException;
 
     <T> T get(String className);
 }

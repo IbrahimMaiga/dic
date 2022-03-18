@@ -26,11 +26,11 @@ public class IoCRegistry implements IoC {
     private static final Map<String, Object> registry = new ConcurrentHashMap<>();
 
     @Override
-    public <T> void configure(Class<T> clazz) throws IoCRegistryException, InvocationTargetException, IllegalAccessException, InstantiationException {
+    public <T> void configure(Class<T> clazz) throws IoCRegistryException, InvocationTargetException, IllegalAccessException, InstantiationException, NoSuchMethodException {
         if (!hasConfigurationAnnotation(clazz)) throwIocRegistryException(clazz.getName());
 
         List<Method> methods = getDeclaredMethods(clazz);
-        T configurationInstance = clazz.newInstance();
+        T configurationInstance = clazz.getDeclaredConstructor().newInstance();
         Map<Method, List<Method>> dependencyTree = buildDependencyTree(methods);
         buildConfig(configurationInstance, methods, dependencyTree);
     }
